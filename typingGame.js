@@ -1,6 +1,5 @@
-
-//Rāda cik vārdi tiek rakstīti minūtē.
-
+let TIME_LIMIT = 60
+//Laika limits
 let quotes_array = [
 "The quick brown fox jumps over the lazy dog.",
 "Pack my box with five dozen liquor jugs.",
@@ -72,9 +71,17 @@ let quotes_array = [
 "In printing and graphic design, filler text is a common tool used to showcase the visual impact of different type styles and designs."
   ];
 //Spēles teksts
-//Rāda rakstītāja pieļautās kļūdas minūtē.
+let timeLeft = TIME_LIMIT;
+let timeElapsed = 0;
+let total_errors = 0;
+let errors = 0;
+let accuracy = 0;
+let characterTyped = 0;
+let current_quote = "";
+let quoteNo = 0;
+let timer = null;
 
-//Rāda laiku.
-
-//Rāda rakstītāja precizitāti.
-
+function TekstuMainisana() {
+  quote_text.textContent = null;
+  current_quote = quotes_array[quoteNo];
+}
