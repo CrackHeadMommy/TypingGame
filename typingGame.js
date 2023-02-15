@@ -80,8 +80,19 @@ let characterTyped = 0;
 let current_quote = "";
 let quoteNo = 0;
 let timer = null;
-
-function TekstuMainisana() {
+//Visu pogu sākums
+function MainitTekstu(){
   quote_text.textContent = null;
   current_quote = quotes_array[quoteNo];
+//Sadala katru un izveido elementu
+ current_quote.split('').forEach(char => {
+   const charSpan = document.createElement('span')
+   charSpan.innertext = char
+   quote_text.appendChild(charSpan)
+ })
+ if (quoteNo < quotes_array.lenght - 1)
+ quoteNo++;
+ else quoteNo = 0
+ //parasta pari ievaditajam tekstam
 }
+//Nospiežot enter rādās jauns tekts
