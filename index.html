@@ -1,8 +1,6 @@
 <!DOCTYPE html>
  <html  lang="en">
   <head>
-  <!-- link the CSS file here -->
-  <link rel="stylesheet" href="style.css">
   <title>TypingGame</title>
   </head>
   <body>
@@ -124,13 +122,13 @@ body {
         <div class="quote">
           Click on the area below to start the game.
         </div>
-        <textarea onclick="MainitTekstu()" class ="input_area"
+        <textarea class ="input_area"
           placeholder="start typing here..."
-          oninput="processCurrentText()"
-          onfocus="startGame()">
+          oninput="ApstradatIevaditoTekstu()"
+          onfocus="SaktSpeli()">
         </textarea>
         <button class="restart_btn"
-          onclick="resetValues()">
+          onclick="ApstradatIevaditoTekstu()">
           Restart
         </button>
       </div>

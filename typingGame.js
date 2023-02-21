@@ -95,7 +95,7 @@ let current_quote = "";
 let quoteNo = 0;
 let timer = null;
 //Visu pogu sākums
-function MainitTekstu(){
+function AtjauninatTekstu(){
   quote_text.textContent = null;
   current_quote = quotes_array[quoteNo];
 //Sadala katru un izveido elementu
@@ -167,15 +167,15 @@ function ApstradatIevaditoTekstu() {
 }
 function SaktSpeli() {
  
-  RestartetLaikaVienības();
+  RestartetLaikaVienibas();
   AtjauninatTekstu();
  
   // Attīra un sāk jaunu laika uzņemšanu
   clearInterval(timer);
-  timer = setInterval(updateTimer, 1000);
+  timer = setInterval(AtjauninaLaiku, 1000);
 }
  
-function RestartetLaikaVienības() {
+function RestartetLaikaVienibas() {
   timeLeft = TIME_LIMIT;
   timeElapsed = 0;
   errors = 0;
@@ -193,4 +193,39 @@ function RestartetLaikaVienības() {
   restart_btn.style.display = "none";
   cpm_group.style.display = "none";
   wpm_group.style.display = "none";
+}
+
+function AtjauninaLaiku() {
+  if (timeLeft > 0) {
+    timeLeft--;
+ 
+    timeElapsed++;
+ 
+    timer_text.textContent = timeLeft + "s";
+  }
+  else {
+    
+    PabeigtSpeli();
+  }
+}
+
+function PabeigtSpeli() {
+ 
+  clearInterval(timer);
+ 
+  input_area.disabled = true;
+ 
+  quote_text.textContent = "Click on restart to start a new game.";
+ 
+  restart_btn.style.display = "block";
+
+  cpm = Math.round(((characterTyped / timeElapsed) * 60));
+  wpm = Math.round((((characterTyped / 5) / timeElapsed) * 60));
+ 
+  cpm_text.textContent = cpm;
+  wpm_text.textContent = wpm;
+ 
+ 
+  cpm_group.style.display = "block";
+  wpm_group.style.display = "block";
 }
