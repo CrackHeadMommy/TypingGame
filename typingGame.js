@@ -71,6 +71,20 @@ let quotes_array = [
 "In printing and graphic design, filler text is a common tool used to showcase the visual impact of different type styles and designs."
   ];
 //Spēles teksts
+
+let timer_text = document.querySelector(".curr_time");
+let accuracy_text = document.querySelector(".curr_accuracy");
+let error_text = document.querySelector(".curr_errors");
+let cpm_text = document.querySelector(".curr_cpm");
+let wpm_text = document.querySelector(".curr_wpm");
+let quote_text = document.querySelector(".quote");
+let input_area = document.querySelector(".input_area");
+let restart_btn = document.querySelector(".restart_btn");
+let cpm_group = document.querySelector(".cpm");
+let wpm_group = document.querySelector(".wpm");
+let error_group = document.querySelector(".errors");
+let accuracy_group = document.querySelector(".accuracy");
+//Izvēlēties nepieciešamo elementu
 let timeLeft = TIME_LIMIT;
 let timeElapsed = 0;
 let total_errors = 0;
@@ -93,6 +107,90 @@ function MainitTekstu(){
  if (quoteNo < quotes_array.lenght - 1)
  quoteNo++;
  else quoteNo = 0
- //parasta pari ievaditajam tekstam
+ //pārraksta pāri ievadītajam tekstam
 }
 //Nospiežot enter rādās jauns tekts
+function ApstradatIevaditoTekstu() {
+
+  curr_input = input_area.value;
+  curr_input_array = curr_input.split('');
+ 
+  // Ievadīto elementu pieaugums
+  characterTyped++;
+ 
+  errors = 0;
+ 
+  quoteSpanArray = quote_text.querySelectorAll('span');
+  quoteSpanArray.forEach((char, index) => {
+    let typedChar = curr_input_array[index]
+ 
+    
+    if (typedChar == null) {
+      char.classList.remove('correct_char');
+      char.classList.remove('incorrect_char');
+ // Sākuma punkts=0
+      
+    } else if (typedChar === char.innerText) {
+      char.classList.add('correct_char');
+      char.classList.remove('incorrect_char');
+ // pareizi ievadītais teksts
+      
+    } else {
+      char.classList.add('incorrect_char');
+      char.classList.remove('correct_char');
+ // kļudaini ievadītais tekts
+      
+      errors++;
+ // Kļudu skaitu pieaugums
+    }
+  });
+ 
+ 
+  error_text.textContent = total_errors + errors;
+  // Parāda kļūdu sakaitu
+ 
+  let correctCharacters = (characterTyped - (total_errors + errors));
+  let accuracyVal = ((correctCharacters / characterTyped) * 100);
+  accuracy_text.textContent = Math.round(accuracyVal);
+  // Atjaunot šobrīddējo tekstu
+  
+  if (curr_input.length == current_quote.length) {
+    AtjauninatTekstu();
+ // Ievadītā teksta kļūdu pārbaudīšana
+   
+    total_errors += errors;
+ // Atjauno kļudu skaitu
+   
+    input_area.value = "";
+// Attīra input laukumu
+  } 
+}
+function SaktSpeli() {
+ 
+  RestartetLaikaVienības();
+  AtjauninatTekstu();
+ 
+  // Attīra un sāk jaunu laika uzņemšanu
+  clearInterval(timer);
+  timer = setInterval(updateTimer, 1000);
+}
+ 
+function RestartetLaikaVienības() {
+  timeLeft = TIME_LIMIT;
+  timeElapsed = 0;
+  errors = 0;
+  total_errors = 0;
+  accuracy = 0;
+  characterTyped = 0;
+  quoteNo = 0;
+  input_area.disabled = false;
+ 
+  input_area.value = "";
+  quote_text.textContent = 'Click on the area below to start the game.';
+  accuracy_text.textContent = 100;
+  timer_text.textContent = timeLeft + 's';
+  error_text.textContent = 0;
+  restart_btn.style.display = "none";
+  cpm_group.style.display = "none";
+  wpm_group.style.display = "none";
+}
