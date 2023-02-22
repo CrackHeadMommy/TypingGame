@@ -103,6 +103,8 @@ function AtjauninatTekstu(){
    const charSpan = document.createElement('span')
    charSpan.innertext = char
    quote_text.appendChild(charSpan)
+   document.getElementById("tekstaLaukums").innerHTML=current_quote;
+   console.log(current_quote);
  })
  if (quoteNo < quotes_array.lenght - 1)
  quoteNo++;
