@@ -198,13 +198,10 @@ function RestartetLaikaVienibas() {
 function AtjauninaLaiku() {
   if (timeLeft > 0) {
     timeLeft--;
- 
     timeElapsed++;
- 
     timer_text.textContent = timeLeft + "s";
   }
   else {
-    
     PabeigtSpeli();
   }
 }
