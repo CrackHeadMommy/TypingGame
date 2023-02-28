@@ -92,12 +92,12 @@ let errors = 0;
 let accuracy = 0;
 let characterTyped = 0;
 let current_quote = "";
-let quoteNo = 0;
+let quoteNo = Math.floor(Math.random() * 68);
 let timer = null;
 //Visu pogu sākums
 function AtjauninatTekstu(){
   quote_text.textContent = null;
-  current_quote = quotes_array[quoteNo];
+  current_quote = quotes_array[Math.floor(Math.random() * 68)];
 //Sadala katru un izveido elementu
  current_quote.split('').forEach(char => {
    const charSpan = document.createElement('span')
